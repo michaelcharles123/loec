@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>teste</title>
+    <style type="text/css">
+        .visivel {
+            visibility: visible;
+        }
+
+        ;
+
+        .invisivel {
+            visibility: hidden;
+        }
+        
+        #camera{
+            width: 300px;
+            height: 50px;
+            border: none;
+            overflow: hidden;
+            float: right;
+        }
+
+    </style>
+</head>
+
+<body>
+    <script src="quagga.min.js"></script>
+    <script>
+        function ler() {
+            document.getElementById('btnCB').className = "invisivel";
+            document.getElementById('resultado').className = "visivel";
+            document.getElementById('camera').className = "visivel";
+
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#camera')    // Or '#yourElement' (optional)
+                },
+                decoder: {
+                    readers: ["code_128_reader"]
+                }
+            }, function (err) {
+                if (err) {
+                    console.log(err);
+                    document.getElementById('msgErr').innerHTML = err.toString();
+                    return
+                }
+                console.log("Initialization finished. Ready to start");
+                Quagga.start();
+
+                Quagga.onDetected(function (data) {
+                    document.querySelector('#resultado').innerHTML = data.codeResult.code;
+                });
+            });
+        };
+    </script>
+    <input id="btnCB" type="button" value="Câmera p/ Cód.Barras" onclick="ler()" class="visivel"
+    style="height: 15px; font-size: 8pt; border-radius: 5px">
+    <input type="button" id="btnZerar" value="Reiniciar" onclick="window.location.reload()"
+    style="height: 15px; font-size: 8pt; border-radius: 5px">
+    <div id="resultado" class="invisivel"></div>
+    <label id="msgErr" style="color: red"></label>
+    <div id="camera" class="invisivel"></div>
+</body>
+
+</html>

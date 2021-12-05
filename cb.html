@@ -15,32 +15,9 @@
     <title>teste</title>
 
     <style type="text/css">
-
-        .visivel {
-
-            visibility: visible;
-
-        }
-
-
-
-        ;
-
-
-
-        .invisivel {
-
-            visibility: hidden;
-
-        }
-
         
 
         #camera{
-
-            width: 300px;
-
-            height: 50px;
 
             border: none;
 
@@ -65,12 +42,6 @@
     <script>
 
         function ler() {
-
-            document.getElementById('btnCB').className = "invisivel";
-
-            document.getElementById('resultado').className = "visivel";
-
-            document.getElementById('camera').className = "visivel";
 
 
 
@@ -113,6 +84,7 @@
                 Quagga.onDetected(function (data) {
 
                     document.querySelector('#resultado').innerHTML = data.codeResult.code;
+                    console.log(data.codeResult.code)
 
                 });
 
@@ -122,7 +94,7 @@
 
     </script>
 
-    <input id="btnCB" type="button" value="Câmera p/ Cód.Barras" onclick="ler()" class="visivel"
+    <input id="btnCB" type="button" value="Câmera p/ Cód.Barras" onclick="ler()" 
 
     style="height: 15px; font-size: 8pt; border-radius: 5px">
 
@@ -130,11 +102,11 @@
 
     style="height: 15px; font-size: 8pt; border-radius: 5px">
 
-    <div id="resultado" class="invisivel"></div>
+    <div id="resultado"></div>
 
     <label id="msgErr" style="color: red"></label>
 
-    <div id="camera" class="invisivel"></div>
+    <div id="camera"></div>
 
 </body>
 
